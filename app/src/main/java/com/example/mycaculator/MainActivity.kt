@@ -65,18 +65,34 @@ fun Caculator() {
         mutableStateOf("0")
     }
 
+    var resultString: String = ""
+
     Column(
         Modifier
-            .fillMaxWidth()
-            .padding(top = 100.dp, start = 15.dp, end = 15.dp)) {
-        Text(text = "CACULATOR", Modifier.fillMaxWidth(), fontSize = 30.sp, fontWeight = FontWeight.Bold)
+            .fillMaxSize()
+            .padding(top = 150.dp, start = 15.dp, end = 15.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
+        ) {
+        Text(text = "CALCULATOR",
+            fontSize = 50.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 15.dp)
+            )
 
         TextField(value = num1, onValueChange = {num1 = it}, Modifier.fillMaxWidth())
         TextField(value = num2, onValueChange = {num2 = it}, Modifier.fillMaxWidth())
 
-        Row (Modifier.padding(start = 15.dp, top = 15.dp)) {
+        Row (
+            Modifier
+                .fillMaxWidth()
+                .padding(top = 17.dp),
+            horizontalArrangement = Arrangement.Center,
+            /*Modifier.padding(start = 15.dp, top = 15.dp)*/
+        ) {
             Button(onClick = {
                 var result: Int = num1.toInt() + num2.toInt()
+                resultString = "$num1 + $num2 = $result"
                 Toast.makeText(mContext,"Result is $result", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "Add")
@@ -86,6 +102,7 @@ fun Caculator() {
 
             Button(onClick = {
                 var result: Int = num1.toInt() - num2.toInt()
+                resultString = "$num1 - $num2 = $result"
                 Toast.makeText(mContext, "Result is $result", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "Sub")
@@ -95,15 +112,17 @@ fun Caculator() {
 
             Button(onClick = {
                 var result: Int = num1.toInt() * num2.toInt()
+                resultString = "$num1 * $num2 = $result"
                 Toast.makeText(mContext, "Result is $result", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "Mul")
             }
 
             Spacer(modifier = Modifier.width(16.dp))
-            
+
             Button(onClick = {
                 var result: Int = num1.toInt() / num2.toInt()
+                resultString = "$num1 / $num2 = $result"
                 Toast.makeText(mContext, "Result is $result", Toast.LENGTH_SHORT).show()
             }) {
                 Text(text = "Div")
@@ -112,6 +131,7 @@ fun Caculator() {
 
     }
 }
+
 
 @Preview
 @Composable
